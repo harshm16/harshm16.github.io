@@ -160,7 +160,7 @@ function myFunction() {
         console.log(atom.resi);
         return li.includes(atom.resi) ? 'white' : 'green';
     };
-    $3Dmol.download("PDB-samples/sample.pdb",viewer,{},function(){
+    $3Dmol.download("529_project/PDB-samples/sample.pdb",viewer,{},function(){
     // viewer.setStyle({chain: 'A', within:{distance: 10, sel:{chain: 'B'}}}, {sphere:{}});
     viewer.setHoverable({},true,function(atom,viewer,event,container) {
     if(!atom.label) {
