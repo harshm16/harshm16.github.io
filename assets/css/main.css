@@ -102,7 +102,7 @@ input, select, textarea {
   .flip-card-front {
 	background-color: #f1f1f1;
 	color: black;
-	z-index: 2;
+	z-index: 10;
   }
   
   .flip-card-back {

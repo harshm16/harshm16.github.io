@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Portfolio Harsh Mishra</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+
+	
+	<body class="is-preload">
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Causal Analysis of Corner Kicks</h2>
+						</header>
+						
+						<h1>Data Extraction Process</h1>
+						<p>We extract the following 6 features from the combination of Opta's tracking and events data. Extracted data can be accessed from the above mentioned google drive link. The notebooks used to extract the data are <code>Extract data.ipynb</code> and <code>Extract data filtered.ipynb</code>.</p>
+						
+						<h4>Already recorded in the data:</h4>
+						<ul>
+							<li><strong>Shot Attempt:</strong>
+								<ul>
+									<li>0 – No shot</li>
+									<li>1 – Goals / Attempt Saved / Miss</li>
+								</ul>
+							</li>
+							<li><strong>Corner Type:</strong>
+								<ul>
+									<li>0 – Inswinger</li>
+									<li>1 – Outswinger</li>
+								</ul>
+							</li>
+						</ul>
+						
+						<h4>Extracted using Clustering some features:</h4>
+						<ul>
+							<li><strong>Defense Type:</strong>
+								<ul>
+									<li>0 – Man Mark</li>
+									<li>1 – Zonal</li>
+								</ul>
+								<p>Gaussian Mixture Models were used to find two clusters based on the following 3 features:</p>
+								<ol>
+									<li>Cost - Distance between attacker & their most closest marker was found using the Linear Sum Assignment problem, using the defensive players (minus Goalkeeper) and attacking players as two different sets.</li>
+									<li>Number of attackers within 6 yards of goal</li>
+									<li>Number of defenders within 6 yards of goal</li>
+								</ol>
+								<p>The code to extract all these 3 features and use GMM to model them is present in <code>Defensive Type Cluster.ipynb</code>. The notebook also contains codes to use Kmeans as an alternative clustering technique and also has GMM model which uses only the Cost as the feature.</p>
+							</li>
+							<li><strong>Attacking Setup:</strong>
+								<ul>
+									<li>1 - Players start from near post</li>
+									<li>2 - Players make runs from deeper areas to the back post</li>
+									<li>3 - Player make two-way movement</li>
+									<li>4 - Player make near post runs</li>
+								</ul>
+								<p>The code to extract this feature can be found in <code>Attacking Setup Cluster.ipynb</code>. Here we follow a similar approach to the research <a href="https://www.sloansportsconference.com/research-papers/routine-inspection-a-playbook-for-corner-kicks">A Playbook for Corner Kicks</a>. Active attackers are first found and then the feature vectors for all the active attackers are computed based on their start and end zones. GMMs were trained on the start and end coordinates of the players to initially find those clusters.</p>
+								<p>How our method differs from their proposed method is in the utilization of these feature vectors of corner kicks to find clusters. Their proposed method uses a Agglomerative Clustering model to cluster the features of all the corner kicks. Although we have the code available to do that in our notebook, we found it harder to comprehend these clusters and then categorize them into clusters that made sense for human understanding. In our approach we use a KMeans cluster to do so, so that we could then use the centers of these clusters to find the start and end locations where most active attackers were found. The player split between each zone can be found in the above mentioned notebook.</p>
+							</li>
+						</ul>
+						
+						<h4>Extracted using Thresholding the data distribution:</h4>
+						<ul>
+							<li><strong>Closely Marked:</strong>
+								<ul>
+									<li>0 – No</li>
+									<li>1 – Yes</li>
+								</ul>
+								<p>The code to extract this feature can be found in <code>Closely Marked.ipynb</code>. The distribution of the distances between the active attackers and their closest markers was seen and a threshold of 1.45m (the median of the distribution) was determined as the value to determine whether the players were closely marked or not. The value of this feature is No, if distance of more than half the active attackers was found to be more than the median distance.</p>
+							</li>
+							<li><strong>Dynamic Movement:</strong>
+								<ul>
+									<li>0 – No</li>
+									<li>1 – Yes</li>
+								</ul>
+								<p>The code to extract this feature can be found in <code>Dynamic Movement.ipynb</code>. The frames where the ball started from the corner kick spot, till the time it reached the closest edge of the penalty box were looked at for this feature. If more than half of the active attackers had speed more than the average speed found in the data distribtuion, we conclude that dynamic movement was made otherwise not.</p>
+							</li>
+						</ul>
+						
+						<p>All these features can be found in <code>features.csv</code> under the data folder.</p>
+			
+
+				<!-- Three -->
+					<section id="three">
+						<h2>Get In Touch</h2>
+						<p> If you want to know more about me or my work, please don't hesitate in reaching out.
+							
+						</p>
+
+							<div class="col-4 col-12-small">
+								<ul class="labeled-icons">
+									<li>
+										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
+										Hertfordshire<br />
+										<!-- Nashville, TN 00000<br /> -->
+										United Kingdom
+									</li>
+									<li>
+										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
+										<a href="mailto:mishraharsh169@gmail.com">mishraharsh169@gmail.com</a>
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+					</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
+						<li><a href="https://github.com/harshm16" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="https://www.linkedin.com/in/harsh-mishra-515624144" class="icon brands fa-linkedin"><span class="label">Dribbble</span></a></li>
+						<li><a href="mailto:mishraharsh169@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<!-- <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+								
