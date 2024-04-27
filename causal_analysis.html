@@ -22,11 +22,69 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>Causal Analysis of Corner Kicks</h2>
+							<h1><strong>Causal Analysis of Corner Kicks</strong></h1>
 						</header>
 						
-						<h1>Data Extraction Process</h1>
-						<p>We extract the following 6 features from the combination of Opta's tracking and events data. Extracted data can be accessed from the above mentioned google drive link. The notebooks used to extract the data are <code>Extract data.ipynb</code> and <code>Extract data filtered.ipynb</code>.</p>
+						<p>This work was selected as one of the Research Presentations at the <a  target="_blank" href="https://www.statsperform.com/2024-opta-forum-session-videos/"> OPTA FORUM 2024</a>, held in London, on the 20th of March.</p>
+
+						<!-- <h4 style="text-align: center;"> <a target="_blank" href="https://www.statsperform.com/2024-opta-forum-session-videos/?mkt_tok=MjI3LUVJWS0zMzEAAAGSgNDAkXv6AQ3iBeIWs6saQ7GR6DrVTLmHZmX6B1A6MFMjVr0GQwcmXt5ShkTrTgjRlx7Kd0EV-pLlGTnN-M6CpFa3LqHQvPyLG_t4wA1f1HB5fGPU#:~:text=19%3A27-,A%20Causal%20Analysis%20of%20Corner%20Kicks%20%E2%80%93%20Harsh%20Mishra,-19%3A57">The Presentation Video  </a></h4>
+
+						<h4 style="text-align: center;"> <a target="_blank" href="assets/opta_project/Presentation_Harsh_Mishra.pptx">Slide Deck used </a></h4>
+
+						<h4 style="text-align: center;"> <a href="#overview">Brief Overview  </a></h4>
+
+						<h4 style="text-align: center;"> <a href="#features">Learn about the Features used  </a></h4>
+
+						<h4 style="text-align: center;"> <a href="#results"> Check out the Results </a> </h4> -->
+
+											
+						<div style="text-align: center;">
+							<a class="button" href="https://www.statsperform.com/2024-opta-forum-session-videos/?mkt_tok=MjI3LUVJWS0zMzEAAAGSgNDAkXv6AQ3iBeIWs6saQ7GR6DrVTLmHZmX6B1A6MFMjVr0GQwcmXt5ShkTrTgjRlx7Kd0EV-pLlGTnN-M6CpFa3LqHQvPyLG_t4wA1f1HB5fGPU#:~:text=19%3A27-,A%20Causal%20Analysis%20of%20Corner%20Kicks%20%E2%80%93%20Harsh%20Mishra,-19%3A57" target="_blank">The Presentation Video</a>
+							<a class="button" href="assets/opta_project/Presentation_Harsh_Mishra.pptx" target="_blank">Slide Deck used</a>
+							<a class="button" href="#overview">Brief Overview</a>
+							<a class="button" href="#features">Learn about the Features used</a>
+							<a class="button" href="#results">Check out the Results</a>
+							<a class="button" href="#conclusion">Conclusion</a>
+							
+						</div>
+						
+						
+					
+						<h2 id="overview">Brief Overview</h2>
+	
+					
+
+						<p>This project proposes to use a Causal Framework to first estimate the effect of various granular level features on shot attempts, during corner kick situations.
+							Then it shows how we can <a href="https://www.youtube.com/watch?v=MHCi8IR81ok"> intervene</a>  on a combination of these features to distill the causal information from the data and compare how different Attacking setups perform against different Defensive Setups and also on different Corner Types.
+
+						</p>
+
+						<img id="graph" src="assets/opta_project/casual graph.png" alt="Causal graph" style="width:700px;height:300px;" >
+						<p style="text-align: center;"><em><a href="#assumptions">Proposed Casual Model</a></em></p>
+
+						
+						<h4 >How is this work beneficial? </h4>
+
+						<p> A lot of things that happen during corner kicks aren't independent of each other, they are causally entangled. For eg., the attacking team knows the type of delivery they expect the corner taker to deliver, they also know the type of defensive setups they are coming up against. Utilizing a causal approach takes into account relationships like these during the modelling process. This work shows how we can use a Causal approach to account for various features and boil it down to a numerical percentage of how good a particular attack is against a particular type of defense or during a particular type of delivery. Thus better guiding the analysts/coaches on what the optimal matchups are, against a particular opposition.   </p>
+						
+						<p>
+						 We take inspiration from <a href="https://www.sloansportsconference.com/research-papers/routine-inspection-a-playbook-for-corner-kicks"> the work of Laurie Shaw </a> and utilize a Causal framework to solve one of their proposed future works, which was to quantize how different Attacking setups performed against different Defensive Setups.
+
+						</p>
+
+						<p>
+							The current iteration of the work uses only categorical features due to limited time availability and labelled data. The main value of the proposed framework is that it can be extended to continuous features as well. xG, Goalkeeper positioning, ball speed are some continuous features that can be integrated. One of the main advantages is that the data from the training grounds can also be used as part of this analysis. As these training sessions provide the perfect environment for performing Controlled Randomized tests.
+						</p>
+
+						<h2 id="features">Features</h2>
+
+						<h4><a href="#graph" id="assumptions"> How did we come up with the Proposed Causal Graph? </a></h4>
+
+						<p> All the features/variables are assumed to be impacted by other features from which they have an incoming edge. All the 5 variables, Corner Type, Attacking Setup, Defense Type, Closely Marked & Dynamic Movement are assumped to be impacting Shot Attempts during a corner situation. 
+							<br>
+							<br>The way the team plans to attack the corners is assumed to be impacted by the type of delivery they expect and the defensive setup they are up against. Whether the attacking team needs to make movements to get to the ball location is dependent on the way they setup and the type of delivery they expect to be put in. This, then further impacts whether the defenders are able to closely guard the attackers or not, which is also impacted by how the defensive team sets up.</p>
+
+						<p>The following 6 features were extracted from the combination of Opta's tracking and events data. The original dataset comprised of 100 matches from the 2021-22 Ligue 1 season. The original and the extracted data are both proprietary, thus cannot be shared.</p>
 						
 						<h4>Already recorded in the data:</h4>
 						<ul>
@@ -53,22 +111,51 @@
 								</ul>
 								<p>Gaussian Mixture Models were used to find two clusters based on the following 3 features:</p>
 								<ol>
-									<li>Cost - Distance between attacker & their most closest marker was found using the Linear Sum Assignment problem, using the defensive players (minus Goalkeeper) and attacking players as two different sets.</li>
+									<li>Cost - Distance between attacker & their most closest marker.
+										<br> The closest marker was initially found for every attacker in the box using the Linear Sum Assignment problem, the defensive players (minus Goalkeeper) and attacking players being the two different sets.</li>
 									<li>Number of attackers within 6 yards of goal</li>
 									<li>Number of defenders within 6 yards of goal</li>
 								</ol>
-								<p>The code to extract all these 3 features and use GMM to model them is present in <code>Defensive Type Cluster.ipynb</code>. The notebook also contains codes to use Kmeans as an alternative clustering technique and also has GMM model which uses only the Cost as the feature.</p>
+								<p> Kmeans clustering method was also tried using the above features, along with a GMM model which only used the Cost as its feature. On analysis (eye-test) it was seen that the GMM with the above 3 features performed the best.
+									
 							</li>
 							<li><strong>Attacking Setup:</strong>
 								<ul>
 									<li>1 - Players start from near post</li>
 									<li>2 - Players make runs from deeper areas to the back post</li>
-									<li>3 - Player make two-way movement</li>
-									<li>4 - Player make near post runs</li>
+									<li>3 - Players make two-way movement</li>
+									<li>4 - Players make near post runs</li>
 								</ul>
-								<p>The code to extract this feature can be found in <code>Attacking Setup Cluster.ipynb</code>. Here we follow a similar approach to the research <a href="https://www.sloansportsconference.com/research-papers/routine-inspection-a-playbook-for-corner-kicks">A Playbook for Corner Kicks</a>. Active attackers are first found and then the feature vectors for all the active attackers are computed based on their start and end zones. GMMs were trained on the start and end coordinates of the players to initially find those clusters.</p>
-								<p>How our method differs from their proposed method is in the utilization of these feature vectors of corner kicks to find clusters. Their proposed method uses a Agglomerative Clustering model to cluster the features of all the corner kicks. Although we have the code available to do that in our notebook, we found it harder to comprehend these clusters and then categorize them into clusters that made sense for human understanding. In our approach we use a KMeans cluster to do so, so that we could then use the centers of these clusters to find the start and end locations where most active attackers were found. The player split between each zone can be found in the above mentioned notebook.</p>
+								<p>Here we follow a similar approach to the research <a href="https://www.sloansportsconference.com/research-papers/routine-inspection-a-playbook-for-corner-kicks">A Playbook for Corner Kicks</a>. Active attackers (players from the attacking team finishing their runs inside the penalty box) are first found and then the feature vectors for all the active attackers are computed based on their start and end zones. GMMs were trained on the start and end coordinates of the players to initially find those clusters.</p>
+
+								<img src="assets/opta_project/active_zones.png" alt="Active attacker zones" style="width:700px;height:300px;" >
+								<p style="text-align: center;"><em>Starting and Ending zones of 'Active Attackers'</em></p>
+
+								<p>How our method differs from their proposed method is in the utilization of these feature vectors of corner kicks to find clusters. Their proposed method uses an Agglomerative Clustering model to cluster the features of all the corner kicks. After trying that approach, we found it harder to comprehend these clusters and then categorized them into clusters that made sense for human understanding. In our approach we use a KMeans clustering, so that we could then use the centers of these clusters to find the start and end locations where most active attackers were found.
+									These cluster centers then were used as references for the naming of the attacking clusters.</p>
 							</li>
+							
+								<div style="display: flex; justify-content: center;">
+									<div style="margin-right: 20px;">
+										<img src="assets/opta_project/cluster1.png" alt="Attacking cluster 1" style="width:350px;height:250px;display: block; margin: 0 auto;">
+										<p style="text-align: center;"><em>Cluster 1 - Players start from near post</em></p>
+									</div>
+									<div>
+										<img src="assets/opta_project/cluster2.png" alt="Attacking cluster 2" style="width:350px;height:250px;display: block; margin: 0 auto;">
+										<p style="text-align: center;"><em>Cluster 2 - Runs from deeper areas to the back post</em></p>
+									</div>
+								</div>
+
+								<div style="display: flex; justify-content: center;">
+									<div style="margin-right: 20px;">
+										<img src="assets/opta_project/cluster3.png" alt="Attacking cluster 3" style="width:350px;height:250px;display: block; margin: 0 auto;">
+										<p style="text-align: center;"><em>Cluster 3 - Players make two-way movement</em></p>
+									</div>
+									<div>
+										<img src="assets/opta_project/cluster4.png" alt="Attacking cluster 4" style="width:350px;height:250px;display: block; margin: 0 auto;">
+										<p style="text-align: center;"><em>Cluster 4 - Players make near post runs</em></p>
+									</div>
+								</div>
 						</ul>
 						
 						<h4>Extracted using Thresholding the data distribution:</h4>
@@ -78,21 +165,42 @@
 									<li>0 – No</li>
 									<li>1 – Yes</li>
 								</ul>
-								<p>The code to extract this feature can be found in <code>Closely Marked.ipynb</code>. The distribution of the distances between the active attackers and their closest markers was seen and a threshold of 1.45m (the median of the distribution) was determined as the value to determine whether the players were closely marked or not. The value of this feature is No, if distance of more than half the active attackers was found to be more than the median distance.</p>
+								<p>The distribution of the distances between the active attackers and their closest markers was seen and a threshold of 1.45m (the median of the distribution) was used as the value to determine whether the players were closely marked or not. The value of this feature is No, if distance of more than half the active attackers was found to be more than the median distance.</p>
 							</li>
 							<li><strong>Dynamic Movement:</strong>
 								<ul>
 									<li>0 – No</li>
 									<li>1 – Yes</li>
 								</ul>
-								<p>The code to extract this feature can be found in <code>Dynamic Movement.ipynb</code>. The frames where the ball started from the corner kick spot, till the time it reached the closest edge of the penalty box were looked at for this feature. If more than half of the active attackers had speed more than the average speed found in the data distribtuion, we conclude that dynamic movement was made otherwise not.</p>
+								<p>The frames where the ball started from the corner kick spot, till the time it reached the closest edge of the penalty box were looked at for this feature. If more than half of the active attackers had speed more than the average speed found in the data distribtuion, we conclude that dynamic movement was made otherwise not.</p>
 							</li>
 						</ul>
-						
-						<p>All these features can be found in <code>features.csv</code> under the data folder.</p>
-			
 
-				<!-- Three -->
+						<h2 id="results">Results</h2>
+						
+						<p> Based on the dataset used, Outswinging corners were seen producing more shots on goal than In-swinging corners. In order to see some exploratory analysis of the different features in the dataset, I would recommend checking out the <a target="_blank" href="assets/opta_project/Presentation_Harsh_Mishra.pptx">slide deck </a> or the <a target="_blank" href="https://www.statsperform.com/2024-opta-forum-session-videos/?mkt_tok=MjI3LUVJWS0zMzEAAAGSgNDAkXv6AQ3iBeIWs6saQ7GR6DrVTLmHZmX6B1A6MFMjVr0GQwcmXt5ShkTrTgjRlx7Kd0EV-pLlGTnN-M6CpFa3LqHQvPyLG_t4wA1f1HB5fGPU#:~:text=19%3A27-,A%20Causal%20Analysis%20of%20Corner%20Kicks%20%E2%80%93%20Harsh%20Mishra,-19%3A57"> presentation video.</a></p>
+						
+		
+						<img src="assets/opta_project/attack_vs_corner.png" alt="Attack vs Corner Type" style="width:700px;height:300px;">
+						<p style="text-align: center;"><em>Matchups - Attack vs Corner Type</em></p>
+						
+						<p>  Near post runs, as well as players being positioned close to the near post were seen the best shot producing options on Out-swinging corners. Near post runs were found to be the best attacking choice for in-swining corners as well.</p>
+
+						<img src="assets/opta_project/attack_vs_defense.png" alt="Attack vs Defense Type" style="width:700px;height:300px;">
+						<p style="text-align: center;"><em>Matchups - Attack vs Defense Type</em></p>
+						
+						<p> On comparing how different types of attacking setups did against the different defensive setups, we saw that against Zonal defenses, when the attackers made two way movements, they were successful in producing more shots. Near post runs were once again seen to be fruitful, this time when facing man-marking defenses.</p>
+
+						<h2 id="conclusion" >Conclusion</h2>
+						<p> The idea behind this project was to find a way to be able to quantify how different attacking setups fare against different defensive setups. Thus being able to give a data point to the coaches, of specific matchups to focus upon, against different oppositions. This framework enables us to do that while also conditioning on various intertwined features that impact shots during corner kicks.  As mentioned above, the framework provides the flexibility to add on more granular level features, continuous or categorical, and condition on them. The addition of such features will also give us the ability to further compute <a href="https://www.youtube.com/watch?v=zkxHWDAefEw"> counter factuals</a> for each situation as well. Automated feature extraction and the use of a causal approach, that provides explainable & actionable insights, are the main advantages of this work. </p>
+						
+
+						<div class="separator">
+							<!-- <span>End of Article</span> -->
+						</div>
+
+						<br> <br>
+						<!-- Three -->
 					<section id="three">
 						<h2>Get In Touch</h2>
 						<p> If you want to know more about me or my work, please don't hesitate in reaching out.
